@@ -16,7 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Exrickx
+ * @author dsh
  */
 @Api(description = "验证码接口")
 @RequestMapping("/xboot/common/captcha")
