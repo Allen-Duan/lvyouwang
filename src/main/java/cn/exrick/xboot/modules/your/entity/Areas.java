@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Where(clause = "areas = 0")
+@Where(clause = "del_flag = 0")
 @Table(name = "areas")
 public class Areas extends XbootBaseEntity {
     private String areaid;
