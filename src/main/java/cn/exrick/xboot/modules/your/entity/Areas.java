@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Where(clause = "areas = 0")
-@Table(name = "provinces")
+@Table(name = "areas")
 public class Areas extends XbootBaseEntity {
     private String areaid;
     private String area;
