@@ -56,7 +56,6 @@ public class User extends XbootBaseEntity {
     private String passStrength;
 
     @ApiModelProperty(value = "用户头像")
-    @Column(length = 1000)
     private String avatar = CommonConstant.USER_DEFAULT_AVATAR;
 
     @ApiModelProperty(value = "用户类型 0普通用户 1管理员")

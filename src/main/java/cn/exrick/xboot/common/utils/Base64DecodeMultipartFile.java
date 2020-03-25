@@ -63,7 +63,7 @@ public class Base64DecodeMultipartFile implements MultipartFile {
 
 
     public static MultipartFile base64Convert(String base64) {
-
+        //解码的时候 ，"，"号前缀要删除掉
         String[] baseStrs = base64.split(",");
         Decoder decoder = Base64.getDecoder();
         byte[] b = decoder.decode(baseStrs[1]);
