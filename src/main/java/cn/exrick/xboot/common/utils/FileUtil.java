@@ -41,8 +41,6 @@ public class FileUtil {
     private String filePath = "";
 
 
-
-
     /**
      * 文件路径上传
      * @param file
@@ -50,9 +48,7 @@ public class FileUtil {
      * @return
      */
     public String localUpload(MultipartFile file, String key) {
-
-        String day = DateUtil.format(DateUtil.date(), "yyyyMMdd");
-        String path = filePath+ "/" + day;
+        String path = "/Users/allen/Documents/Allen_Project/xboot-front-master/src/assets";
         File dir = new File(path);
         if(!dir.exists()){
             dir.mkdirs();
@@ -63,7 +59,7 @@ public class FileUtil {
         }
         try {
             file.transferTo(f);
-            return path + "/" + key;
+            return "data:image/jpeg;base64,"+Base64Url.getbase64Url(path + "/" + key);
         } catch (IOException e) {
             log.error(e.toString());
             throw new XbootException("上传文件出错");

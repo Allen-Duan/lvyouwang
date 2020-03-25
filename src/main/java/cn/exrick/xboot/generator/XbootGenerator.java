@@ -30,13 +30,13 @@ public class XbootGenerator {
      * 实体类名
      * 建议仅需修改
      */
-    private static final String className = "Provinces";
+    private static final String className = "LineDailyDetail";
 
     /**
      * 类说明描述
      * 建议仅需修改
      */
-    private static final String description = "地区";
+    private static final String description = "旅游线路详情";
 
     /**
      * 作者名

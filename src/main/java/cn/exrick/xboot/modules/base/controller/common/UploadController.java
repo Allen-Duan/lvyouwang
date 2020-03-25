@@ -1,6 +1,7 @@
 package cn.exrick.xboot.modules.base.controller.common;
 
 import cn.exrick.xboot.common.utils.Base64DecodeMultipartFile;
+import cn.exrick.xboot.common.utils.FileUtil;
 import cn.exrick.xboot.common.utils.QiniuUtil;
 import cn.exrick.xboot.common.utils.ResultUtil;
 import cn.exrick.xboot.common.vo.Result;
@@ -29,6 +30,9 @@ public class UploadController {
     @Autowired
     private QiniuUtil qiniuUtil;
 
+    @Autowired
+    private FileUtil fileUtil;
+
     @RequestMapping(value = "/file",method = RequestMethod.POST)
     @ApiOperation(value = "文件上传")
     public Result<Object> upload(@RequestParam(required = false) MultipartFile file,
@@ -42,9 +46,7 @@ public class UploadController {
         String result = null;
         String fileName = qiniuUtil.renamePic(file.getOriginalFilename());
         try {
-            InputStream inputStream = file.getInputStream();
-            //上传七牛云服务器
-            result = qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
+            result = fileUtil.localUpload(file,fileName);
         } catch (Exception e) {
             log.error(e.toString());
             return ResultUtil.error(e.toString());
