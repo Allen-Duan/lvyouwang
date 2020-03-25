@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import cn.exrick.xboot.common.vo.SearchVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 旅游线路接口
@@ -23,4 +24,5 @@ public interface LineService extends XbootBaseService<Line, String> {
     */
     Page<Line> findByCondition(Line line, SearchVo searchVo, Pageable pageable);
 
+    void saveLineAndDetail(Map<String, Object> paramMap);
 }

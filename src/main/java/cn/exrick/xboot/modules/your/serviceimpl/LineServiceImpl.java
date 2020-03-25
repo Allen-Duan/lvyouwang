@@ -1,7 +1,11 @@
 package cn.exrick.xboot.modules.your.serviceimpl;
 
+import cn.exrick.xboot.common.exception.XbootException;
+import cn.exrick.xboot.common.utils.ReflectUtil;
+import cn.exrick.xboot.modules.your.dao.LineDailyDetailDao;
 import cn.exrick.xboot.modules.your.dao.LineDao;
 import cn.exrick.xboot.modules.your.entity.Line;
+import cn.exrick.xboot.modules.your.entity.LineDailyDetail;
 import cn.exrick.xboot.modules.your.service.LineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,7 @@ import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.lang.reflect.Field;
+import java.util.Map;
 
 /**
  * 旅游线路接口实现
@@ -32,6 +37,12 @@ public class LineServiceImpl implements LineService {
 
     @Autowired
     private LineDao lineDao;
+
+    @Autowired
+    private ReflectUtil reflectUtil;
+
+    @Autowired
+    private LineDailyDetailDao dailyDetailDao;
 
     @Override
     public LineDao getRepository() {
@@ -63,6 +74,20 @@ public class LineServiceImpl implements LineService {
                 return null;
             }
         }, pageable);
+    }
+
+    @Override
+    public void saveLineAndDetail(Map<String, Object> paramMap) {
+        Line line;
+        LineDailyDetail lineDailyDetail;
+        try {
+            line = reflectUtil.mapConvertBean(paramMap, new Line());
+            lineDailyDetail = reflectUtil.mapConvertBean(paramMap, new LineDailyDetail());
+        } catch (Exception e) {
+            throw new XbootException("参数有误 请联系管理员");
+        }
+        lineDao.save(line);
+        dailyDetailDao.save(lineDailyDetail);
     }
 
 }

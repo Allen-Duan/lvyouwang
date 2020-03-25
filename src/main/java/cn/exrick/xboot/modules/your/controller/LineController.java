@@ -1,6 +1,7 @@
 package cn.exrick.xboot.modules.your.controller;
 
 import cn.exrick.xboot.base.XbootBaseController;
+import cn.exrick.xboot.common.exception.XbootException;
 import cn.exrick.xboot.common.utils.PageUtil;
 import cn.exrick.xboot.common.utils.ResultUtil;
 import cn.exrick.xboot.common.vo.PageVo;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
 
 /**
  * @author dsh
@@ -42,5 +45,16 @@ public class LineController extends XbootBaseController<Line, String> {
 
         Page<Line> page = lineService.findByCondition(line, searchVo, PageUtil.initPage(pageVo));
         return new ResultUtil<Page<Line>>().setData(page);
+    }
+
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    @ApiOperation(value = "添加旅游线路")
+    public Result saveLineAndDetail(@RequestBody Map<String,Object> paramMap){
+        try{
+            lineService.saveLineAndDetail(paramMap);
+        }catch (XbootException e){
+            return new ResultUtil<>().setErrorMsg("添加旅游线路有误 "+e.getMsg());
+        }
+        return new ResultUtil<>().setSuccessMsg("添加旅游线路成功!");
     }
 }
