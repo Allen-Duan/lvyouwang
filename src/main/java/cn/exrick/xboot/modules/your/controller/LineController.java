@@ -62,7 +62,7 @@ public class LineController extends XbootBaseController<Line, String> {
 
     @RequestMapping(value = "/getAllbyLikeName", method = RequestMethod.GET)
     @ApiOperation(value = "根据名称模糊查询列表")
-    public Result getAllbyLikeName(@RequestParam PageVo pageVo,@RequestParam(required = false) String name){
+    public Result getAllbyLikeName(PageVo pageVo,@RequestParam(required = false) String name){
 
         List<Map<String,Object>> retList =  lineService.getAllbyLikeName(name);
         //手动分页

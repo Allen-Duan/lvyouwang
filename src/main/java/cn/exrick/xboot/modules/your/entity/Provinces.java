@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Where(clause = "del_flag = 0")
 @Table(name = "provinces")
 public class Provinces extends XbootBaseEntity {
-    private int provinceid;
+    private String provinceid;
     private String province;
 
 
