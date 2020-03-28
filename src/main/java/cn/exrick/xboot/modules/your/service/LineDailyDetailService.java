@@ -23,4 +23,5 @@ public interface LineDailyDetailService extends XbootBaseService<LineDailyDetail
     */
     Page<LineDailyDetail> findByCondition(LineDailyDetail lineDailyDetail, SearchVo searchVo, Pageable pageable);
 
+    List<LineDailyDetail> getAllBylineId(String lineId);
 }
