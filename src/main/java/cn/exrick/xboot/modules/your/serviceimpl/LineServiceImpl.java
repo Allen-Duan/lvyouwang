@@ -100,7 +100,7 @@ public class LineServiceImpl implements LineService {
 
     @Override
     public List<Map<String, Object>> getAllbyLikeName(String name) {
-        List<Map<String, Object>> retList = null;
+        List<Map<String, Object>> retList = new ArrayList<>();
         List<Line> all;
         if (StringUtils.isEmpty(name)) {
              all = lineDao.findAll();
