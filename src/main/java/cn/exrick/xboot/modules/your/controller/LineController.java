@@ -47,7 +47,7 @@ public class LineController extends XbootBaseController<Line, String> {
         return new ResultUtil<Page<Line>>().setData(page);
     }
 
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "saveLineAndDetail",method = RequestMethod.POST)
     @ApiOperation(value = "添加旅游线路")
     public Result saveLineAndDetail(@RequestBody Map<String,Object> paramMap){
         try{
