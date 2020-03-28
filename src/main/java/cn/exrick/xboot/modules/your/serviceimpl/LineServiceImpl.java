@@ -99,14 +99,14 @@ public class LineServiceImpl implements LineService {
     }
 
     @Override
-    public List<Map<String, Object>> getAllbyLikeName(String name) {
+    public List<Map<String, Object>> getAllbyLikeName(String lineTitle) {
         List<Map<String, Object>> retList = new ArrayList<>();
         List<Line> all;
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmpty(lineTitle)) {
              all = lineDao.findAll();
 
         }else{
-            all = lineDao.findAllByLineTitleLike(name);
+            all = lineDao.findAllByLineTitleLike(lineTitle);
         }
         for (Line line : all) {
             Map<String, Object> map = ObjectUtil.beanToMapFormatDate(line);

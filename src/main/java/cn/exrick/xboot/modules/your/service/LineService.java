@@ -26,5 +26,5 @@ public interface LineService extends XbootBaseService<Line, String> {
 
     void saveLineAndDetail(Map<String, Object> paramMap);
 
-    List<Map<String, Object>> getAllbyLikeName(String name);
+    List<Map<String, Object>> getAllbyLikeName(String lineTitle);
 }
