@@ -23,4 +23,5 @@ public interface AreasService extends XbootBaseService<Areas, String> {
     */
     Page<Areas> findByCondition(Areas areas, SearchVo searchVo, Pageable pageable);
 
+    List<Areas> getAreasByCityid(String cityId);
 }

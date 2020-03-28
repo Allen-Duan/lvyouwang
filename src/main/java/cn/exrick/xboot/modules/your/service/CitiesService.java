@@ -23,4 +23,5 @@ public interface CitiesService extends XbootBaseService<Cities, String> {
     */
     Page<Cities> findByCondition(Cities cities, SearchVo searchVo, Pageable pageable);
 
+    List<Cities> getCitiesByProvinceId(String provinceId);
 }

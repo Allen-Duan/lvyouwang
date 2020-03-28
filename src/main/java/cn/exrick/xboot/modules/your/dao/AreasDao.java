@@ -10,5 +10,5 @@ import java.util.List;
  * @author dsh
  */
 public interface AreasDao extends XbootBaseDao<Areas, String> {
-
+    List<Areas> findByCityid(String cityId);
 }

@@ -6,6 +6,7 @@ import cn.exrick.xboot.common.utils.ResultUtil;
 import cn.exrick.xboot.common.vo.PageVo;
 import cn.exrick.xboot.common.vo.Result;
 import cn.exrick.xboot.common.vo.SearchVo;
+import cn.exrick.xboot.modules.your.entity.Areas;
 import cn.exrick.xboot.modules.your.entity.Cities;
 import cn.exrick.xboot.modules.your.service.CitiesService;
 import io.swagger.annotations.Api;
@@ -15,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author dsh
@@ -42,5 +46,12 @@ public class CitiesController extends XbootBaseController<Cities, String> {
 
         Page<Cities> page = citiesService.findByCondition(cities, searchVo, PageUtil.initPage(pageVo));
         return new ResultUtil<Page<Cities>>().setData(page);
+    }
+
+    @RequestMapping(value = "/getCitiesByProvinceId", method = RequestMethod.GET)
+    @ApiOperation(value = "根据provinceId获取城市")
+    public Result getAreasByCityId(@RequestParam Map<String,Object> paramMap){
+        List<Cities> retList =  citiesService.getCitiesByProvinceId(paramMap.get("provinceId").toString());
+        return new ResultUtil<List<Cities>>().setData(retList);
     }
 }
