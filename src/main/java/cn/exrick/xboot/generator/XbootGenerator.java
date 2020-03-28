@@ -30,19 +30,19 @@ public class XbootGenerator {
      * 实体类名
      * 建议仅需修改
      */
-    private static final String className = "order";
+    private static final String className = "Order";
 
     /**
      * 类说明描述
      * 建议仅需修改
      */
-    private static final String description = "我的订单接口";
+    private static final String description = "订单接口";
 
     /**
      * 作者名
      * 建议仅需修改
      */
-    private static final String author = "dsh";
+    private static final String author = "段";
 
     /**
      * 是否生成树形结构相关接口

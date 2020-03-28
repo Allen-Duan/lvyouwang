@@ -7,11 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
-@Data
-@Entity
-@Where(clause = "del_flag = 0")
-@Table(name = "t_order")
-public class order extends XbootBaseEntity {
+//@Data
+//@Entity
+//@Where(clause = "del_flag = 0")
+//@Table(name = "t_order")
+public class Order extends XbootBaseEntity {
 
     private String userId;
 
