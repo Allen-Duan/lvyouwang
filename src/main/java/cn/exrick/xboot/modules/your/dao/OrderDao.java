@@ -10,5 +10,5 @@ import java.util.List;
  * @author 段
  */
 public interface OrderDao extends XbootBaseDao<Order, String> {
-
+    List<Order> findAllByUserId(String userId);
 }

@@ -1,6 +1,11 @@
 package cn.exrick.xboot.modules.your.serviceimpl;
 
+import cn.exrick.xboot.common.exception.XbootException;
+import cn.exrick.xboot.common.utils.ObjectUtil;
+import cn.exrick.xboot.config.properties.XbootTokenProperties;
+import cn.exrick.xboot.modules.your.dao.LineDao;
 import cn.exrick.xboot.modules.your.dao.OrderDao;
+import cn.exrick.xboot.modules.your.entity.Line;
 import cn.exrick.xboot.modules.your.entity.Order;
 import cn.exrick.xboot.modules.your.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,12 +19,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.lang.reflect.Field;
+import java.util.Map;
 
 /**
  * 订单接口接口实现
@@ -32,6 +39,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private LineDao lineDao;
 
     @Override
     public OrderDao getRepository() {
@@ -63,6 +73,22 @@ public class OrderServiceImpl implements OrderService {
                 return null;
             }
         }, pageable);
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllByUserId(String userId) {
+        List<Order> allByUserId = orderDao.findAllByUserId(userId);
+        List<Map<String,Object>> retList = new ArrayList<>();
+        for (Order order : allByUserId) {
+            Map<String, Object> map = ObjectUtil.beanToMapFormatDate(order);
+            Line line = lineDao.findById(order.getLineId()).orElse(null);
+            if (line == null) {
+                throw new XbootException("线路信息获取失败 请联系管理员!");
+            }
+            map.putAll(ObjectUtil.beanToMapFormatDate(line));
+            retList.add(map);
+        }
+        return retList;
     }
 
 }

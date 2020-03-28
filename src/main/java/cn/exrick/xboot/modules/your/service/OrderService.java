@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import cn.exrick.xboot.common.vo.SearchVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 订单接口接口
@@ -23,4 +24,5 @@ public interface OrderService extends XbootBaseService<Order, String> {
     */
     Page<Order> findByCondition(Order order, SearchVo searchVo, Pageable pageable);
 
+    List<Map<String, Object>> getAllByUserId(String userId);
 }
