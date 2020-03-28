@@ -30,13 +30,13 @@ public class XbootGenerator {
      * 实体类名
      * 建议仅需修改
      */
-    private static final String className = "LineDailyDetai1l";
+    private static final String className = "order";
 
     /**
      * 类说明描述
      * 建议仅需修改
      */
-    private static final String description = "旅游线路详情";
+    private static final String description = "我的订单接口";
 
     /**
      * 作者名
@@ -54,7 +54,7 @@ public class XbootGenerator {
      * 数据库表名前缀
      * 下方请根据需要修改
      */
-    private static final String tablePre = "";
+    private static final String tablePre = "t_";
 
     /**
      * 主键类型
