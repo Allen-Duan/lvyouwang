@@ -50,7 +50,7 @@ public class CitiesController extends XbootBaseController<Cities, String> {
 
     @RequestMapping(value = "/getCitiesByProvinceId", method = RequestMethod.GET)
     @ApiOperation(value = "根据provinceId获取城市")
-    public Result getAreasByCityId(@RequestParam Map<String,Object> paramMap){
+    public Result getCitiesByProvinceId(@RequestParam Map<String,Object> paramMap){
         List<Cities> retList =  citiesService.getCitiesByProvinceId(paramMap.get("provinceId").toString());
         return new ResultUtil<List<Cities>>().setData(retList);
     }
