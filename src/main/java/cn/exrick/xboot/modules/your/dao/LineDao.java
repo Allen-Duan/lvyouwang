@@ -10,5 +10,5 @@ import java.util.List;
  * @author dsh
  */
 public interface LineDao extends XbootBaseDao<Line, String> {
-
+    List<Line> findAllByLineTitleLike(String name);
 }

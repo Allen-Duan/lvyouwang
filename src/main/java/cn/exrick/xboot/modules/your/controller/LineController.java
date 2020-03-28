@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,5 +58,17 @@ public class LineController extends XbootBaseController<Line, String> {
             return new ResultUtil<>().setErrorMsg("添加旅游线路有误 "+e.getMsg());
         }
         return new ResultUtil<>().setSuccessMsg("添加旅游线路成功!");
+    }
+
+    @RequestMapping(value = "/getAllbyLikeName", method = RequestMethod.GET)
+    @ApiOperation(value = "根据名称模糊查询列表")
+    public Result getAllbyLikeName(@RequestParam PageVo pageVo,@RequestParam(required = false) String name){
+
+        List<Map<String,Object>> retList =  lineService.getAllbyLikeName(name);
+        //手动分页
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("totalElements",retList.size());
+        retMap.put("content", PageUtil.listToPage(pageVo,retList));
+        return new ResultUtil<>().setData(retMap);
     }
 }
