@@ -109,10 +109,11 @@ public class LineServiceImpl implements LineService {
             all = lineDao.findAllByLineTitleLike(name);
         }
         for (Line line : all) {
-            line.setAreasId(Objects.requireNonNull(areasDao.findByAreaid(line.getAreasId()).orElse(null)).getArea());
-            line.setCitiesId(Objects.requireNonNull(citiesDao.findByCityid(line.getCitiesId()).orElse(null)).getCity());
-            line.setProvincesId(Objects.requireNonNull(provincesDao.findByProvinceid(line.getProvincesId()).orElse(null)).getProvince());
-            retList.add(ObjectUtil.beanToMapFormatDate(line));
+            Map<String, Object> map = ObjectUtil.beanToMapFormatDate(line);
+            map.put("areasName",Objects.requireNonNull(areasDao.findByAreaid(line.getAreasId()).orElse(null)).getArea());
+            map.put("cityName",Objects.requireNonNull(citiesDao.findByCityid(line.getCitiesId()).orElse(null)).getCity());
+            map.put("provinceName",Objects.requireNonNull(provincesDao.findByProvinceid(line.getProvincesId()).orElse(null)).getProvince());
+            retList.add(map);
         }
         return retList;
     }
