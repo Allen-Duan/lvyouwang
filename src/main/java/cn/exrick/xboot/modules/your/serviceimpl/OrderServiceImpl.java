@@ -104,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
         if (StringUtils.isEmpty(userName)) {
             allByUserIdIn = orderDao.findAll();
         }else{
-            byUsernameLike = userDao.findByUsernameLike(userName);
+            byUsernameLike = userDao.findByUsernameLike("%"+userName+"%");
             allByUserIdIn = orderDao.findAllByUserIdIn(byUsernameLike);
         }
         List<Map<String,Object>> retList = new ArrayList<>();
