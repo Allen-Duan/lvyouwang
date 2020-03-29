@@ -1,9 +1,9 @@
 package cn.exrick.xboot.modules.your.serviceimpl;
 
 import cn.exrick.xboot.common.exception.XbootException;
+import cn.exrick.xboot.common.utils.ObjectUtil;
 import cn.exrick.xboot.common.utils.ReflectUtil;
-import cn.exrick.xboot.modules.your.dao.LineDailyDetailDao;
-import cn.exrick.xboot.modules.your.dao.LineDao;
+import cn.exrick.xboot.modules.your.dao.*;
 import cn.exrick.xboot.modules.your.entity.Line;
 import cn.exrick.xboot.modules.your.entity.LineDailyDetail;
 import cn.exrick.xboot.modules.your.service.LineService;
@@ -18,13 +18,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
+import org.springframework.util.StringUtils;
 
-import java.util.List;
+import java.awt.image.ImageProducer;
+import java.util.*;
 import javax.persistence.criteria.*;
-import java.util.ArrayList;
-import java.util.Date;
 import java.lang.reflect.Field;
-import java.util.Map;
 
 /**
  * 旅游线路接口实现
@@ -43,6 +42,15 @@ public class LineServiceImpl implements LineService {
 
     @Autowired
     private LineDailyDetailDao dailyDetailDao;
+
+    @Autowired
+    private AreasDao areasDao;
+
+    @Autowired
+    private CitiesDao citiesDao;
+
+    @Autowired
+    private ProvincesDao provincesDao;
 
     @Override
     public LineDao getRepository() {
@@ -88,6 +96,25 @@ public class LineServiceImpl implements LineService {
         }
         lineDao.save(line);
         dailyDetailDao.save(lineDailyDetail);
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllbyLikeName(String name) {
+        List<Map<String, Object>> retList = new ArrayList<>();
+        List<Line> all;
+        if (StringUtils.isEmpty(name)) {
+             all = lineDao.findAll();
+        }else{
+            all = lineDao.findAllByLineTitleLike("%"+name+"%");
+        }
+        for (Line line : all) {
+            Map<String, Object> map = ObjectUtil.beanToMapFormatDate(line);
+            map.put("areasName",Objects.requireNonNull(areasDao.findByAreaid(line.getAreasId()).orElse(null)).getArea());
+            map.put("cityName",Objects.requireNonNull(citiesDao.findByCityid(line.getCitiesId()).orElse(null)).getCity());
+            map.put("provinceName",Objects.requireNonNull(provincesDao.findByProvinceid(line.getProvincesId()).orElse(null)).getProvince());
+            retList.add(map);
+        }
+        return retList;
     }
 
 }

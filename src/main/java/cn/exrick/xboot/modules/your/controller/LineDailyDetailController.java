@@ -13,8 +13,13 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author dsh1
@@ -42,5 +47,17 @@ public class LineDailyDetailController extends XbootBaseController<LineDailyDeta
 
         Page<LineDailyDetail> page = lineDailyDetailService.findByCondition(lineDailyDetail, searchVo, PageUtil.initPage(pageVo));
         return new ResultUtil<Page<LineDailyDetail>>().setData(page);
+    }
+
+    @RequestMapping(value = "/getAllBylineId", method = RequestMethod.GET)
+    @ApiOperation(value = "获取列表")
+    public Result getAllBylineId(@RequestParam String lineId , @ModelAttribute PageVo pageVo){
+
+        List<LineDailyDetail> retList  = lineDailyDetailService.getAllBylineId(lineId);
+        //手动分页
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("totalElements",retList.size());
+        retMap.put("content", PageUtil.listToPage(pageVo,retList));
+        return new ResultUtil<>().setData(retMap);
     }
 }

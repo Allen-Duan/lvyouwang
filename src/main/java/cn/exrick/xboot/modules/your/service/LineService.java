@@ -25,4 +25,6 @@ public interface LineService extends XbootBaseService<Line, String> {
     Page<Line> findByCondition(Line line, SearchVo searchVo, Pageable pageable);
 
     void saveLineAndDetail(Map<String, Object> paramMap);
+
+    List<Map<String, Object>> getAllbyLikeName(String lineTitle);
 }

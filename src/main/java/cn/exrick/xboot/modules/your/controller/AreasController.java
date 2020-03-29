@@ -16,6 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author dsh
  */
@@ -42,5 +45,13 @@ public class AreasController extends XbootBaseController<Areas, String> {
 
         Page<Areas> page = areasService.findByCondition(areas, searchVo, PageUtil.initPage(pageVo));
         return new ResultUtil<Page<Areas>>().setData(page);
+    }
+
+    @RequestMapping(value = "/getAreasByCityId", method = RequestMethod.GET)
+    @ApiOperation(value = "根据cityId获取地区")
+    public Result getAreasByCityId(@RequestParam Map<String,Object> paramMap){
+
+        List<Areas> retList =  areasService.getAreasByCityid(paramMap.get("cityId").toString());
+        return new ResultUtil<List<Areas>>().setData(retList);
     }
 }

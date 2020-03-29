@@ -65,4 +65,9 @@ public class CitiesServiceImpl implements CitiesService {
         }, pageable);
     }
 
+    @Override
+    public List<Cities> getCitiesByProvinceId(String provinceId) {
+        return citiesDao.findByProvinceid(provinceId);
+    }
+
 }

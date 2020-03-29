@@ -2,6 +2,7 @@ package cn.exrick.xboot.modules.your.entity;
 
 import cn.exrick.xboot.base.XbootBaseEntity;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 
@@ -32,5 +33,7 @@ public class Line extends XbootBaseEntity {
 
     @ApiModelProperty("旅游价格")
     private BigDecimal linePrice;
+
+    private String image;
 
 }

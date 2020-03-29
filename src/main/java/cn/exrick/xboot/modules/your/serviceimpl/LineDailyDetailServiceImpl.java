@@ -5,6 +5,7 @@ import cn.exrick.xboot.modules.your.entity.LineDailyDetail;
 import cn.exrick.xboot.modules.your.service.LineDailyDetailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cn.exrick.xboot.common.vo.SearchVo;
@@ -63,6 +64,11 @@ public class LineDailyDetailServiceImpl implements LineDailyDetailService {
                 return null;
             }
         }, pageable);
+    }
+
+    @Override
+    public List<LineDailyDetail> getAllBylineId(String lineId) {
+        return lineDailyDetailDao.getAllBylineId(lineId);
     }
 
 }

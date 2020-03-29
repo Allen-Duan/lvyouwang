@@ -65,4 +65,9 @@ public class AreasServiceImpl implements AreasService {
         }, pageable);
     }
 
+    @Override
+    public List<Areas> getAreasByCityid(String cityId) {
+        return areasDao.findByCityid(cityId);
+    }
+
 }

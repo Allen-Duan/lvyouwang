@@ -161,7 +161,7 @@ public class PageUtil {
     }
 
     /**
-     * 防Mybatis-Plus order by注入
+     * 防Mybatis-Plus Order by注入
      * @param param
      */
     public static void SQLInject(String param){
