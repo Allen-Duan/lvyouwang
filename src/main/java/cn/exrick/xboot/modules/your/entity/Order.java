@@ -15,7 +15,9 @@ public class Order extends XbootBaseEntity {
 
     private String userId;
 
-    private BigDecimal orderPrice;
+    private Integer status = 0;
+
+    private BigDecimal orderPrice = new BigDecimal("0.00");
 
     private String lineId;
 
