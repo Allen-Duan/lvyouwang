@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
@@ -98,8 +99,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Map<String, Object>> getAllByLikeUserName(String userName) {
-        List<String> byUsernameLike = userDao.findByUsernameLike(userName);
-        List<Order> allByUserIdIn = orderDao.findAllByUserIdIn(byUsernameLike);
+        List<String> byUsernameLike ;
+        List<Order> allByUserIdIn ;
+        if (StringUtils.isEmpty(userName)) {
+            allByUserIdIn = orderDao.findAll();
+        }else{
+            byUsernameLike = userDao.findByUsernameLike(userName);
+            allByUserIdIn = orderDao.findAllByUserIdIn(byUsernameLike);
+        }
         List<Map<String,Object>> retList = new ArrayList<>();
         for (Order order : allByUserIdIn) {
             Map<String, Object> map = ObjectUtil.beanToMapFormatDate(order);

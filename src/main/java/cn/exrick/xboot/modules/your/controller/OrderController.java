@@ -64,7 +64,7 @@ public class OrderController extends XbootBaseController<Order, String> {
 
     @RequestMapping(value = "/getAllByLikeUserName", method = RequestMethod.GET)
     @ApiOperation(value = "后台使用 根据用户名称模糊查询列表")
-    public Result getAllByLikeUserName(@RequestParam String userName , @ModelAttribute PageVo pageVo){
+    public Result getAllByLikeUserName(@RequestParam(required = false) String userName , @ModelAttribute PageVo pageVo){
 
         List<Map<String,Object>> retList  = orderService.getAllByLikeUserName(userName);
         //手动分页
