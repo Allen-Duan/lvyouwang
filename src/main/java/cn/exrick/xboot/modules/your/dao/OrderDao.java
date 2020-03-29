@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface OrderDao extends XbootBaseDao<Order, String> {
     List<Order> findAllByUserId(String userId);
+
+    List<Order> findAllByUserIdIn(List<String> userid);
 }

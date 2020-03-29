@@ -2,6 +2,8 @@ package cn.exrick.xboot.modules.base.dao;
 
 import cn.exrick.xboot.base.XbootBaseDao;
 import cn.exrick.xboot.modules.base.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -38,4 +40,7 @@ public interface UserDao extends XbootBaseDao<User,String> {
      * @return
      */
     List<User> findByDepartmentId(String departmentId);
+
+    @Query(value = "select id from t_user where username like ?1 and del_flag = 0 ",nativeQuery = true)
+    List<String> findByUsernameLike(String username);
 }

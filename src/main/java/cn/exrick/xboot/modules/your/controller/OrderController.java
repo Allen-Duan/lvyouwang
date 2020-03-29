@@ -50,12 +50,23 @@ public class OrderController extends XbootBaseController<Order, String> {
         return new ResultUtil<Page<Order>>().setData(page);
     }
 
-
     @RequestMapping(value = "/getAllByUserId", method = RequestMethod.GET)
-    @ApiOperation(value = "获取列表")
+    @ApiOperation(value = "根据用户名查询列表")
     public Result getAllByUserId(@RequestParam String userId , @ModelAttribute PageVo pageVo){
 
         List<Map<String,Object>> retList  = orderService.getAllByUserId(userId);
+        //手动分页
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("totalElements",retList.size());
+        retMap.put("content", PageUtil.listToPage(pageVo,retList));
+        return new ResultUtil<>().setData(retMap);
+    }
+
+    @RequestMapping(value = "/getAllByLikeUserName", method = RequestMethod.GET)
+    @ApiOperation(value = "后台使用 根据用户名称模糊查询列表")
+    public Result getAllByLikeUserName(@RequestParam String userName , @ModelAttribute PageVo pageVo){
+
+        List<Map<String,Object>> retList  = orderService.getAllByLikeUserName(userName);
         //手动分页
         Map<String, Object> retMap = new HashMap<>();
         retMap.put("totalElements",retList.size());

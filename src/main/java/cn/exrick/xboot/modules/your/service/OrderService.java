@@ -25,4 +25,6 @@ public interface OrderService extends XbootBaseService<Order, String> {
     Page<Order> findByCondition(Order order, SearchVo searchVo, Pageable pageable);
 
     List<Map<String, Object>> getAllByUserId(String userId);
+
+    List<Map<String, Object>> getAllByLikeUserName(String userName);
 }

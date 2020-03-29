@@ -3,6 +3,8 @@ package cn.exrick.xboot.modules.your.serviceimpl;
 import cn.exrick.xboot.common.exception.XbootException;
 import cn.exrick.xboot.common.utils.ObjectUtil;
 import cn.exrick.xboot.config.properties.XbootTokenProperties;
+import cn.exrick.xboot.modules.base.dao.UserDao;
+import cn.exrick.xboot.modules.base.entity.User;
 import cn.exrick.xboot.modules.your.dao.LineDao;
 import cn.exrick.xboot.modules.your.dao.OrderDao;
 import cn.exrick.xboot.modules.your.entity.Line;
@@ -39,6 +41,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private LineDao lineDao;
@@ -86,6 +91,28 @@ public class OrderServiceImpl implements OrderService {
                 throw new XbootException("线路信息获取失败 请联系管理员!");
             }
             map.putAll(ObjectUtil.beanToMapFormatDate(line));
+            retList.add(map);
+        }
+        return retList;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllByLikeUserName(String userName) {
+        List<String> byUsernameLike = userDao.findByUsernameLike(userName);
+        List<Order> allByUserIdIn = orderDao.findAllByUserIdIn(byUsernameLike);
+        List<Map<String,Object>> retList = new ArrayList<>();
+        for (Order order : allByUserIdIn) {
+            Map<String, Object> map = ObjectUtil.beanToMapFormatDate(order);
+            Line line = lineDao.findById(order.getLineId()).orElse(null);
+            if (line == null) {
+                throw new XbootException("线路信息获取失败 请联系管理员!");
+            }
+            map.putAll(ObjectUtil.beanToMapFormatDate(line));
+            User user = userDao.findById(order.getUserId()).orElse(null);
+            if (user == null) {
+                throw new XbootException("查询用户失败 请联系管理员");
+            }
+            map.put("userName",user.getUsername());
             retList.add(map);
         }
         return retList;
