@@ -30,13 +30,13 @@ public class XbootGenerator {
      * 实体类名
      * 建议仅需修改
      */
-    private static final String className = "Order";
+    private static final String className = "TourismCustomization";
 
     /**
      * 类说明描述
      * 建议仅需修改
      */
-    private static final String description = "订单接口";
+    private static final String description = "定制接口";
 
     /**
      * 作者名
