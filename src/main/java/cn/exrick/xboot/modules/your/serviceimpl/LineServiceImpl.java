@@ -87,15 +87,12 @@ public class LineServiceImpl implements LineService {
     @Override
     public void saveLineAndDetail(Map<String, Object> paramMap) {
         Line line;
-        LineDailyDetail lineDailyDetail;
         try {
             line = reflectUtil.mapConvertBean(paramMap, new Line());
-            lineDailyDetail = reflectUtil.mapConvertBean(paramMap, new LineDailyDetail());
         } catch (Exception e) {
             throw new XbootException("参数有误 请联系管理员");
         }
         lineDao.save(line);
-        dailyDetailDao.save(lineDailyDetail);
     }
 
     @Override
