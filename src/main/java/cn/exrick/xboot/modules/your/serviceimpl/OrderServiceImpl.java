@@ -114,6 +114,7 @@ public class OrderServiceImpl implements OrderService {
             if (line == null) {
                 throw new XbootException("线路信息获取失败 请联系管理员!");
             }
+            map.put("orderId",order.getId());
             map.putAll(ObjectUtil.beanToMapFormatDate(line));
             User user = userDao.findById(order.getUserId()).orElse(null);
             if (user == null) {
