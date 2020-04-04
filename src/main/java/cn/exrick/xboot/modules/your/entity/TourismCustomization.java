@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 @Entity
 @Data
@@ -21,8 +22,8 @@ public class TourismCustomization extends XbootBaseEntity {
     private String arriveProvinceId;
     private String adultNo;
     private String childrenNo;
-    private Timestamp arriveCityId;
-    private Timestamp departureTime;
-    private Timestamp arriveTime;
+    private String arriveCityId;
+    private Date departureTime;
+    private Date arriveTime;
     private String perCapitaCost;
 }
