@@ -76,7 +76,7 @@ public class ReflectUtil {
     }
 
     /**
-     * Description: 去除表中公共字段
+     * Description: 去除表中公共字dsh
      * @return: void
      * @param:  map
      * @author: dsh
@@ -115,7 +115,7 @@ public class ReflectUtil {
         if (clazz == null || Object.class.getName().equals(clazz.getName())) {
             return null;
         }
-        //获得某个类的所有声明的字段，即包括public、private和proteced，但是不包括父类的申明字段。
+        //获得某个类的所有声明的字dsh，即包括public、private和proteced，但是不包括父类的申明字dsh。
         Field[] declaredFields = clazz.getDeclaredFields();
         for (Field field : declaredFields) {
             if (field.getName().equals(fieldName)) {

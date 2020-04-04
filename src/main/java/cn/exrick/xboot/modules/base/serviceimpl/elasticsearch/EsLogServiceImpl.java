@@ -76,7 +76,7 @@ public class EsLogServiceImpl implements EsLogService {
             qb = QueryBuilders.boolQuery().must(qb0).must(qb1).must(qb2);
         }
 
-        //多字段搜索
+        //多字dsh搜索
         return logDao.search(qb, pageable);
     }
 }

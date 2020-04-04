@@ -19,7 +19,7 @@ public class PageVo implements Serializable{
     @ApiModelProperty(value = "页面大小")
     private int pageSize;
 
-    @ApiModelProperty(value = "排序字段")
+    @ApiModelProperty(value = "排序字dsh")
     private String sort;
 
     @ApiModelProperty(value = "排序方式 asc/desc")

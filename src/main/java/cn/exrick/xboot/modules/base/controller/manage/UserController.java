@@ -80,7 +80,7 @@ public class UserController {
     public Result<Object> regist(User u){
 
         if(StrUtil.isBlank(u.getUsername()) || StrUtil.isBlank(u.getPassword())){
-            return ResultUtil.error("缺少必需表单字段");
+            return ResultUtil.error("缺少必需表单字dsh");
         }
 
         if(userService.findByUsername(u.getUsername())!=null){
@@ -303,7 +303,7 @@ public class UserController {
                                  @RequestParam(required = false) String[] roles){
 
         if(StrUtil.isBlank(u.getUsername()) || StrUtil.isBlank(u.getPassword())){
-            return ResultUtil.error("缺少必需表单字段");
+            return ResultUtil.error("缺少必需表单字dsh");
         }
 
         if(userService.findByUsername(u.getUsername())!=null){

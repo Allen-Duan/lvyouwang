@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 定制接口接口
- * @author 段
+ * @author dsh
  */
 public interface TourismCustomizationService extends XbootBaseService<TourismCustomization, String> {
 

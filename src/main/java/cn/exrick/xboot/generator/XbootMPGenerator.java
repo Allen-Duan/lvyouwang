@@ -103,7 +103,7 @@ public class XbootMPGenerator {
         // 生成代码
         generateCode(gt);
 
-        // 读取你的实体类中的字段，补充生成条件构造分页查询代码【需自行复制控制台打印输出的代码自行覆盖】
+        // 读取你的实体类中的字dsh，补充生成条件构造分页查询代码【需自行复制控制台打印输出的代码自行覆盖】
         generatePlus(gt);
 
         // 根据类名删除生成的代码
@@ -304,7 +304,7 @@ public class XbootMPGenerator {
         try {
             generateMPlus(gt);
         }catch (Exception e){
-            log.info("请确保实体类存在并且已完善填入字段后再生成条件构造代码哦！");
+            log.info("请确保实体类存在并且已完善填入字dsh后再生成条件构造代码哦！");
         }
     }
 
@@ -327,7 +327,7 @@ public class XbootMPGenerator {
 
             java.lang.reflect.Field field = fields[i];
             field.setAccessible(true);
-            // 字段名
+            // 字dsh名
             String fieldName = field.getName();
             String fieldType = field.getType().getName();
             // 白名单
@@ -339,7 +339,7 @@ public class XbootMPGenerator {
                 continue;
             }
 
-            // 获得字段注解
+            // 获得字dsh注解
             ApiModelProperty myFieldAnnotation = field.getAnnotation(ApiModelProperty.class);
             String fieldNameCN = fieldName;
             if (myFieldAnnotation != null) {

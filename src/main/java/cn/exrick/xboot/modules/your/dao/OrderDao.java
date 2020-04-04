@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * 订单接口数据处理层
- * @author 段
+ * @author dsh
  */
 public interface OrderDao extends XbootBaseDao<Order, String> {
     List<Order> findAllByUserId(String userId);

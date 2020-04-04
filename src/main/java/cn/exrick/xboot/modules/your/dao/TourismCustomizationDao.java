@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * 定制接口数据处理层
- * @author 段
+ * @author dsh
  */
 public interface TourismCustomizationDao extends XbootBaseDao<TourismCustomization, String> {
 
